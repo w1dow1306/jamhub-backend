@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Discord clone where you can play game,listen to music and many more",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon test.js",
+    "start": "nodemon server.js"
+  },
+  "author": "w1dow",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.2.4",
+    "nodemon": "^3.1.0"
+  }
+}
