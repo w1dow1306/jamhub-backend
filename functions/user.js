@@ -30,11 +30,11 @@ exports.login = async function login(user) {
     const olduser = await User.findOne({ username: user.username });
     if (olduser) {
         if (olduser.password == user.password) {
-            return ["User logged in!", olduser.id, olduser.username,1];
+            return ["User logged in!", olduser.id, olduser.username, 1];
         } else {
-            return ["Password or Username wrong",2];
+            return ["Password or Username wrong", 2];
         }
     } else {
-        return ["User is not connected to us!",2];
+        return ["User is not connected to us!", 2];
     }
 }

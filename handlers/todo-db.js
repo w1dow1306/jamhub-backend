@@ -31,7 +31,7 @@ exports.getIdtodos = async (req, res) => {
 
 exports.getmytodos = async (req, res) => {
     try {
-        const uid  = req.cookies["token"]
+        const uid = req.cookies["token"]
         const data = await query('select * from todos where uid =' + uid);
         res.send(data)
     } catch (error) {
@@ -79,18 +79,26 @@ exports.deletetodo = async (req, res) => {
 //update priority,status
 exports.updatetodo = async (req, res) => {
     try {
-        let { t_id, prior, status } = req.body;
-        let uid = req.cookies["token"];
-        if (!prior) {
-            prior = (await query((`select priority from todos where t_id='${t_id}' and uid=${uid};`)))[0]["priority"];
-            // prior = ((`select priority from todos where t_id='${t_id}' and uid=${uid};`));
+        let { t_id, status, title, desc, body, c } = req.body;
+        if (c == true) {
+            await query(`delete from todos where t_id='${t_id}'`);
         }
+        let uid = req.cookies["token"];
         if (!status) {
             status = (await query(`select status from todos where t_id='${t_id}' and uid=${uid};`))[0]["status"];
         }
-        await query(`update todos set priority=${prior},status=${status} where uid=${uid} and t_id='${t_id}'`);
-        const data = await query(`select * from  todos where uid=${uid} and t_id='${t_id}'`);
-        res.json({ message: data });
+        if (!body) {
+            body = (await query(`select body from todos where t_id='${t_id}' and uid=${uid};`))[0]["body"];
+        }
+        if (!desc) {
+            desc = (await query(`select \`desc\` from todos where t_id='${t_id}' and uid=${uid};`))[0]["desc"];
+        }
+        if (!title) {
+            title = (await query(`select title from todos where t_id='${t_id}' and uid=${uid};`))[0]["title"];
+        }
+        await query(`update todos set status=?, title=?, \`desc\`=?, body=? where uid=? and t_id=?`, [status, title, desc, body, uid, t_id]);
+        // const data = await query(`select * from  todos where uid=? and t_id=?`, [uid, t_id]);
+        res.json({ message: "updated" });
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: error });
