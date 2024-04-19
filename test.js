@@ -103,7 +103,7 @@ adduser()
 
 //     app.post("/signup", async (req, res) => {
             
-//         let usr = req.body;    
+//         let usr = req.body;
 //         await olduser(usr).then(e => {
 //             if (e == 1) {
 //                 adduser(usr).then(id => {
@@ -136,3 +136,57 @@ adduser()
 // app.listen(8000, () => {
 //     console.log("Database server running on port 8000")
 // })
+
+
+
+// const { Server } = require('socket.io');
+
+// const io = new Server({
+//     cors: {
+//         origin: "http://localhost:3000"
+//     }
+// });
+
+// const users = [];
+
+// io.on('connection', (socket) => {
+
+
+
+//     socket.on('register', (user) => {
+//         users.push(user)
+//         console.log(`${user.name} connected`);
+//         socket.broadcast.emit("user-joined", user.name);
+//     })
+
+
+
+//     socket.on('join-room', (user) => {
+//         socket.join(user.room);
+//         console.log(`${user.name} connected to room ${user.room},rooms: ${Array.from(socket.rooms).join(' , ')}`);
+//         const rooms = Array.from(socket.rooms).slice(1);
+//         socket.emit('rooms', rooms);
+//     })
+
+
+//     socket.on('msg', ({ msg, room, name }) => {
+//         console.log(`${name}: ${msg} in[${room}]`);
+//         if (msg) {
+//             if (room[0]) {
+//                 socket.to(room[0]).emit('nmsg', ({ msg: msg, name: name }));
+//             } else {
+//                 io.emit('nmsg', { msg: msg, name: name });
+//             }
+//         }
+//     })
+
+
+
+
+// });
+
+
+// // console.clear();
+// console.log("Chat sever is up");
+
+// io.listen(4000)

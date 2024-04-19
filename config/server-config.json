@@ -1,0 +1,22 @@
+{
+    "database": {
+        "host": "localhost",
+        "port": 27017,
+        "url": "mongodb://localhost:27017/test"
+    },
+    "server": {
+        "host": "localhost",
+        "port": 8080
+    },
+    "sql": {
+        "host": "localhost",
+        "port":  2020,
+        "dbuser": "user",
+        "dbpass": "user",
+        "dbhost": "localhost"
+    },
+    "chat":{
+        "host":"localhost",
+        "port":8900
+    }
+}
